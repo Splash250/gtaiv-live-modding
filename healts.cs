@@ -16,22 +16,10 @@ namespace LiveModding
 
         private void OnTick(object sender, EventArgs e)
         {
-            Ped player = Player.Character;
-            if (player == null)
-            {
-                return;
-            }
-
-            player.MakeProofTo(true, true, true, true, true);
             Player.MaxHealth = HealthValue;
             Player.MaxArmor = HealthValue;
-            player.Health = HealthValue;
-            player.Armor = HealthValue;
-
-            if (player.isInVehicle() && player.CurrentVehicle != null)
-            {
-                player.CurrentVehicle.MakeProofTo(true, true, true, true, true);
-            }
+            Player.Character.Health = HealthValue;
+            Player.Character.Armor = HealthValue;
         }
     }
 }
