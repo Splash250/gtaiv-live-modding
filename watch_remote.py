@@ -141,6 +141,16 @@ def pull_latest(remote_name, branch_name):
         log(output)
 
 
+def fetch_remote(remote_name, branch_name):
+    result = run_git(["fetch", remote_name, branch_name])
+    if result.returncode != 0:
+        raise RuntimeError(result.stderr.strip() or result.stdout.strip() or "git fetch failed")
+
+    output = result.stdout.strip()
+    if output:
+        log(output)
+
+
 def ensure_scripts_dir():
     if not SCRIPTS_DIR.exists():
         raise RuntimeError(f"GTA IV scripts folder does not exist: {SCRIPTS_DIR}")
@@ -505,6 +515,7 @@ def main():
     print_repo_status(repo_lines)
     update_status(state, mode_label, current_local_sha, current_remote_sha, repo_lines, decision="startup", reason="", live_paths=[])
 
+    pending_remote_sha = current_remote_sha if current_remote_sha != current_local_sha else ""
     last_remote_sha = current_remote_sha
     while True:
         try:
@@ -513,8 +524,12 @@ def main():
             current_local_sha = local_head()
             repo_lines = status_lines()
 
-            if current_remote_sha != last_remote_sha:
-                log(f"Detected remote update: {last_remote_sha} -> {current_remote_sha}")
+            if current_remote_sha != current_local_sha and not pending_remote_sha:
+                pending_remote_sha = current_remote_sha
+
+            if pending_remote_sha or current_remote_sha != last_remote_sha:
+                target_remote_sha = pending_remote_sha or current_remote_sha
+                log(f"Detected remote update: {current_local_sha} -> {target_remote_sha}")
                 if has_uncommitted_changes():
                     print_reload_decision("skip", "repo has uncommitted local changes")
                     print_repo_status(status_lines())
@@ -530,28 +545,31 @@ def main():
                         live_paths=[],
                     )
                 else:
-                    pulled_paths = changed_files_between(last_remote_sha, current_remote_sha)
+                    pre_pull_sha = current_local_sha
+                    fetch_remote(args.remote, args.branch)
+                    target_remote_sha = remote_head(args.remote, args.branch)
+                    pulled_paths = changed_files_between(pre_pull_sha, target_remote_sha)
                     pull_latest(args.remote, args.branch)
-                    state["last_pulled_sha"] = current_remote_sha
+                    state["last_pulled_sha"] = target_remote_sha
                     sync_live_targets()
                     live_paths = changed_live_files(pulled_paths)
                     if latest_commit_subject().startswith("log_"):
                         print_reload_decision("skip", "pulled log-only commit")
-                        mark_skip(state, current_remote_sha, "log_only_commit")
+                        mark_skip(state, target_remote_sha, "log_only_commit")
                         update_status(
                             state,
                             mode_label,
                             local_head(),
-                            current_remote_sha,
+                            target_remote_sha,
                             status_lines(),
                             decision="skip",
                             reason="log_only_commit",
                             live_paths=[],
                         )
                     elif args.unsafe_auto_reload:
-                        request_ingame_reload(current_remote_sha)
-                        state["last_deployed_sha"] = current_remote_sha
-                        state["last_reload_requested_sha"] = current_remote_sha
+                        request_ingame_reload(target_remote_sha)
+                        state["last_deployed_sha"] = target_remote_sha
+                        state["last_reload_requested_sha"] = target_remote_sha
                         state["last_skip_reason"] = ""
                         save_state(state)
                         print_reload_decision("reload", "unsafe mode bypassed live-file gating")
@@ -559,21 +577,21 @@ def main():
                             state,
                             mode_label,
                             local_head(),
-                            current_remote_sha,
+                            target_remote_sha,
                             status_lines(),
                             decision="reload",
                             reason="",
                             live_paths=live_paths,
                         )
                     elif live_paths:
-                        if state.get("last_reload_requested_sha") == current_remote_sha:
+                        if state.get("last_reload_requested_sha") == target_remote_sha:
                             print_reload_decision("skip", "reload for this commit was already requested earlier")
-                            mark_skip(state, current_remote_sha, "duplicate_reload_request")
+                            mark_skip(state, target_remote_sha, "duplicate_reload_request")
                             update_status(
                                 state,
                                 mode_label,
                                 local_head(),
-                                current_remote_sha,
+                                target_remote_sha,
                                 status_lines(),
                                 decision="skip",
                                 reason="duplicate_reload_request",
@@ -583,9 +601,9 @@ def main():
                             log("Pulled live files:")
                             for path in live_paths:
                                 log(f"  {path}")
-                            request_ingame_reload(current_remote_sha)
-                            state["last_deployed_sha"] = current_remote_sha
-                            state["last_reload_requested_sha"] = current_remote_sha
+                            request_ingame_reload(target_remote_sha)
+                            state["last_deployed_sha"] = target_remote_sha
+                            state["last_reload_requested_sha"] = target_remote_sha
                             state["last_skip_reason"] = ""
                             save_state(state)
                             print_reload_decision("reload", "live .cs/.ini files changed")
@@ -593,7 +611,7 @@ def main():
                                 state,
                                 mode_label,
                                 local_head(),
-                                current_remote_sha,
+                                target_remote_sha,
                                 status_lines(),
                                 decision="reload",
                                 reason="",
@@ -601,18 +619,21 @@ def main():
                             )
                     else:
                         print_reload_decision("skip", "pulled update changed no live .cs/.ini files")
-                        mark_skip(state, current_remote_sha, "no_live_file_changes")
+                        mark_skip(state, target_remote_sha, "no_live_file_changes")
                         update_status(
                             state,
                             mode_label,
                             local_head(),
-                            current_remote_sha,
+                            target_remote_sha,
                             status_lines(),
                             decision="skip",
                             reason="no_live_file_changes",
                             live_paths=[],
                         )
+                current_remote_sha = remote_head(args.remote, args.branch)
+                current_local_sha = local_head()
                 last_remote_sha = current_remote_sha
+                pending_remote_sha = ""
 
             current_remote_sha = remote_head(args.remote, args.branch)
             current_local_sha = local_head()
