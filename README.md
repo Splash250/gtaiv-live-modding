@@ -9,6 +9,8 @@ Run `python watch_remote.py` inside this repo to poll `origin/main` and fast-for
 The watcher will skip pulls when the repo has uncommitted local changes.
 It also scans the repo for `.cs` and `.ini` files and creates missing hard links into the GTA IV `scripts` folder both on startup and after every successful pull.
 After a successful pull, it writes a reload trigger file.
+It also snapshots GTA IV runtime logs into the repo `logs` folder, but only when the live logs appear to contain errors. Those error snapshots are committed as `log_DATETIME` and pushed automatically.
+Log-only sync intentionally skips in-game script reload to avoid an infinite push/pull/reload loop.
 
 ## In-Game Auto Reload
 
