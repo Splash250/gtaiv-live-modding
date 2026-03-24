@@ -1,4 +1,5 @@
 import argparse
+import json
 import shutil
 import subprocess
 import sys
@@ -11,6 +12,7 @@ REPO_DIR = Path(__file__).resolve().parent
 GTAIV_DIR = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto IV\GTAIV")
 SCRIPTS_DIR = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto IV\GTAIV\scripts")
 RELOAD_TRIGGER = REPO_DIR / ".reload_request"
+STATE_FILE = REPO_DIR / ".live_state.json"
 LOGS_DIR = REPO_DIR / "logs"
 LOG_SOURCE_FILES = [
     GTAIV_DIR / "ScriptHookDotNet.log",
@@ -29,6 +31,12 @@ ERROR_MARKERS = [
 ]
 ERROR_TAIL_LINE_COUNT = 80
 LIVE_FILE_SUFFIXES = {".cs", ".ini"}
+DEFAULT_STATE = {
+    "last_pulled_sha": "",
+    "last_deployed_sha": "",
+    "last_reload_requested_sha": "",
+    "last_skip_reason": "",
+}
 
 
 def run_git(args):
@@ -171,6 +179,33 @@ def ensure_logs_dir():
     LOGS_DIR.mkdir(exist_ok=True)
 
 
+def load_state():
+    if not STATE_FILE.exists():
+        return dict(DEFAULT_STATE)
+
+    try:
+        data = json.loads(STATE_FILE.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return dict(DEFAULT_STATE)
+
+    state = dict(DEFAULT_STATE)
+    for key in DEFAULT_STATE:
+        value = data.get(key, "")
+        state[key] = value if isinstance(value, str) else ""
+    return state
+
+
+def save_state(state):
+    serializable = {key: state.get(key, "") for key in DEFAULT_STATE}
+    STATE_FILE.write_text(json.dumps(serializable, indent=2) + "\n", encoding="utf-8")
+
+
+def mark_skip(state, pulled_sha, reason):
+    state["last_pulled_sha"] = pulled_sha or state.get("last_pulled_sha", "")
+    state["last_skip_reason"] = reason
+    save_state(state)
+
+
 def read_log_tail(source, line_count=ERROR_TAIL_LINE_COUNT):
     try:
         lines = source.read_text(encoding="utf-8", errors="ignore").splitlines()
@@ -267,6 +302,7 @@ def main():
 
     ensure_remote_exists(args.remote)
     ensure_branch_exists(args.remote, args.branch)
+    state = load_state()
     create_missing_hardlinks()
     commit_and_push_logs(args.remote, args.branch)
 
@@ -291,20 +327,32 @@ def main():
                 print(f"Detected remote update: {last_remote_sha} -> {current_remote_sha}")
                 if has_uncommitted_changes():
                     print("Skipping pull because the repo has uncommitted local changes.")
+                    mark_skip(state, "", "repo_has_uncommitted_changes")
                 else:
                     pulled_paths = changed_files_between(last_remote_sha, current_remote_sha)
                     pull_latest(args.remote, args.branch)
+                    state["last_pulled_sha"] = current_remote_sha
                     create_missing_hardlinks()
                     live_paths = changed_live_files(pulled_paths)
                     if latest_commit_subject().startswith("log_"):
                         print("Pulled log-only update; skipping in-game reload.")
+                        mark_skip(state, current_remote_sha, "log_only_commit")
                     elif live_paths:
-                        print("Pulled live files:")
-                        for path in live_paths:
-                            print(f"  {path}")
-                        request_ingame_reload()
+                        if state.get("last_reload_requested_sha") == current_remote_sha:
+                            print("Reload for this commit was already requested earlier; skipping duplicate reload.")
+                            mark_skip(state, current_remote_sha, "duplicate_reload_request")
+                        else:
+                            print("Pulled live files:")
+                            for path in live_paths:
+                                print(f"  {path}")
+                            request_ingame_reload()
+                            state["last_deployed_sha"] = current_remote_sha
+                            state["last_reload_requested_sha"] = current_remote_sha
+                            state["last_skip_reason"] = ""
+                            save_state(state)
                     else:
                         print("Pulled update changed no live .cs/.ini files; skipping in-game reload.")
+                        mark_skip(state, current_remote_sha, "no_live_file_changes")
                 last_remote_sha = current_remote_sha
         except KeyboardInterrupt:
             print("Stopped.")
