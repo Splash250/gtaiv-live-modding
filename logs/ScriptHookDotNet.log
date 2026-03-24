@@ -447,3 +447,29 @@
 2026-03-24 15:22:06 - Loading dynamic scriptfile 'scripts\BodyguardChaosF6.cs' ...
 2026-03-24 15:22:06 -  ...found script 'BodyguardChaosF6.BodyguardChaosScript'!
 2026-03-24 15:22:06 - Loading dynamic scriptfile 'scripts\BuggedSwingF4.cs' ...
+2026-03-24 15:22:06 -  ...found script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 15:22:06 - Loading dynamic scriptfile 'scripts\CarCannonMicroSMG.cs' ...
+2026-03-24 15:22:06 -  ...found script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 15:22:06 - Loading dynamic scriptfile 'scripts\DrivingSkills.cs' ...
+2026-03-24 15:22:06 -  ...found script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 15:22:06 - Loading dynamic scriptfile 'scripts\HelloWorldF5.cs' ...
+2026-03-24 15:22:07 -  ...found script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 15:22:07 - Loading dynamic scriptfile 'scripts\HelloWorldLive.cs' ...
+2026-03-24 15:22:07 -  ...found script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 15:22:07 - Loading dynamic scriptfile 'scripts\TestLiveDeploy.cs' ...
+2026-03-24 15:22:07 -  ...found script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 15:22:07 - Loading dynamic scriptfile 'scripts\TornadoF7.cs' ...
+2026-03-24 15:22:07 -  ...found script 'TornadoF7.TornadoF7Script'!
+2026-03-24 15:22:07 - DONE! 9 valid scripts found!
+
+2026-03-24 15:22:07 - STARTING SCRIPTS...
+2026-03-24 15:22:07 - Deferred ReloadScripts request completed.
+2026-03-24 15:22:07 -  ...successfully started script 'TornadoF7.TornadoF7Script'!
+2026-03-24 15:22:07 -  ...successfully started script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 15:22:07 -  ...successfully started script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 15:22:07 -  ...successfully started script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 15:22:07 -  ...successfully started script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 15:22:07 -  ...successfully started script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 15:22:07 -  ...successfully started script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 15:22:07 -  ...successfully started script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 15:22:07 -  ...successfully started script 'LiveModding.AutoReloadBridgeScript'!
