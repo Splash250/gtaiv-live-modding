@@ -299,6 +299,10 @@ def commit_and_push_logs(remote_name, branch_name, state):
     return True
 
 
+def print_reload_decision(decision, reason):
+    print(f"[deploy] {decision}: {reason}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Poll a git remote and fast-forward pull when the remote branch changes."
@@ -310,6 +314,11 @@ def main():
         type=int,
         default=10,
         help="Polling interval in seconds. Default: 10",
+    )
+    parser.add_argument(
+        "--unsafe-auto-reload",
+        action="store_true",
+        help="Reload after any non-log pull, even when no live .cs/.ini files changed.",
     )
     args = parser.parse_args()
 
@@ -324,6 +333,10 @@ def main():
     commit_and_push_logs(args.remote, args.branch, state)
 
     print(f"Watching {args.remote}/{args.branch} from {REPO_DIR}")
+    if args.unsafe_auto_reload:
+        print("[mode] unsafe-auto-reload enabled")
+    else:
+        print("[mode] safe live deploy")
 
     last_remote_sha = None
     while True:
@@ -343,7 +356,7 @@ def main():
             if current_remote_sha != last_remote_sha:
                 print(f"Detected remote update: {last_remote_sha} -> {current_remote_sha}")
                 if has_uncommitted_changes():
-                    print("Skipping pull because the repo has uncommitted local changes.")
+                    print_reload_decision("skip", "repo has uncommitted local changes")
                     mark_skip(state, "", "repo_has_uncommitted_changes")
                 else:
                     pulled_paths = changed_files_between(last_remote_sha, current_remote_sha)
@@ -352,11 +365,18 @@ def main():
                     create_missing_hardlinks()
                     live_paths = changed_live_files(pulled_paths)
                     if latest_commit_subject().startswith("log_"):
-                        print("Pulled log-only update; skipping in-game reload.")
+                        print_reload_decision("skip", "pulled log-only commit")
                         mark_skip(state, current_remote_sha, "log_only_commit")
+                    elif args.unsafe_auto_reload:
+                        request_ingame_reload()
+                        state["last_deployed_sha"] = current_remote_sha
+                        state["last_reload_requested_sha"] = current_remote_sha
+                        state["last_skip_reason"] = ""
+                        save_state(state)
+                        print_reload_decision("reload", "unsafe mode bypassed live-file gating")
                     elif live_paths:
                         if state.get("last_reload_requested_sha") == current_remote_sha:
-                            print("Reload for this commit was already requested earlier; skipping duplicate reload.")
+                            print_reload_decision("skip", "reload for this commit was already requested earlier")
                             mark_skip(state, current_remote_sha, "duplicate_reload_request")
                         else:
                             print("Pulled live files:")
@@ -367,8 +387,9 @@ def main():
                             state["last_reload_requested_sha"] = current_remote_sha
                             state["last_skip_reason"] = ""
                             save_state(state)
+                            print_reload_decision("reload", "live .cs/.ini files changed")
                     else:
-                        print("Pulled update changed no live .cs/.ini files; skipping in-game reload.")
+                        print_reload_decision("skip", "pulled update changed no live .cs/.ini files")
                         mark_skip(state, current_remote_sha, "no_live_file_changes")
                 last_remote_sha = current_remote_sha
         except KeyboardInterrupt:
