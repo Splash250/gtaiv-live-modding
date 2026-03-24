@@ -131,7 +131,7 @@ def pull_latest(remote_name, branch_name):
 
     output = result.stdout.strip()
     if output:
-        print(output)
+        log(output)
 
 
 def ensure_scripts_dir():
@@ -152,29 +152,76 @@ def repo_files_to_link():
         yield path
 
 
-def create_missing_hardlinks():
+def target_map():
+    mapping = {}
+    collisions = []
+    for source in repo_files_to_link():
+        target_name = source.name
+        if target_name in mapping and mapping[target_name] != source:
+            collisions.append((target_name, mapping[target_name], source))
+            continue
+        mapping[target_name] = source
+
+    if collisions:
+        collision_lines = []
+        for target_name, first_source, second_source in collisions:
+            collision_lines.append(
+                f"{target_name}: {first_source.relative_to(REPO_DIR)} vs {second_source.relative_to(REPO_DIR)}"
+            )
+        raise RuntimeError("Live target name collision: " + "; ".join(collision_lines))
+
+    return mapping
+
+
+def is_expected_live_target(source, target):
+    try:
+        return source.samefile(target)
+    except OSError:
+        return False
+
+
+def sync_live_targets():
     ensure_scripts_dir()
 
     created = []
-    skipped = []
-    for source in repo_files_to_link():
-        target = SCRIPTS_DIR / source.name
-        if target.exists():
-            skipped.append(target.name)
+    repaired = []
+    validated = []
+    for target_name, source in sorted(target_map().items()):
+        target = SCRIPTS_DIR / target_name
+        if not target.exists():
+            target.hardlink_to(source)
+            created.append(target.name)
             continue
 
+        if is_expected_live_target(source, target):
+            validated.append(target.name)
+            continue
+
+        if not target.is_file():
+            raise RuntimeError(f"Live target cannot be repaired safely: {target}")
+
+        target.unlink()
         target.hardlink_to(source)
-        created.append(target.name)
+        repaired.append(target.name)
 
     if created:
         log("Created hard links:")
         for name in created:
             log(f"  {name}")
 
-    if skipped:
-        log("Skipped existing targets:")
-        for name in skipped:
+    if repaired:
+        log("Repaired live targets:")
+        for name in repaired:
             log(f"  {name}")
+
+    if validated:
+        log(f"Validated live targets: {len(validated)}")
+
+    return {
+        "created": created,
+        "repaired": repaired,
+        "validated": validated,
+    }
 
 
 def request_ingame_reload():
@@ -353,7 +400,7 @@ def main():
     ensure_branch_exists(args.remote, args.branch)
     ensure_runtime_dir()
     state = load_state()
-    create_missing_hardlinks()
+    sync_live_targets()
     current_local_sha = local_head()
     current_remote_sha = remote_head(args.remote, args.branch)
     repo_lines = status_lines()
@@ -396,7 +443,7 @@ def main():
                     pulled_paths = changed_files_between(last_remote_sha, current_remote_sha)
                     pull_latest(args.remote, args.branch)
                     state["last_pulled_sha"] = current_remote_sha
-                    create_missing_hardlinks()
+                    sync_live_targets()
                     live_paths = changed_live_files(pulled_paths)
                     if latest_commit_subject().startswith("log_"):
                         print_reload_decision("skip", "pulled log-only commit")
