@@ -8,13 +8,13 @@ namespace LiveModding
     {
         public TestLiveDeployScript()
         {
-            Game.DisplayText("Live reload test v4 loaded from desktop clone.", 4000);
+            Game.DisplayText("Live reload test v5 loaded from desktop clone.", 4000);
             BindKey(Keys.F9, new KeyPressDelegate(ShowPing));
         }
 
         private void ShowPing()
         {
-            Game.DisplayText("F9 ping from live reload test v4.", 2500);
+            Game.DisplayText("F9 ping from live reload test v5.", 2500);
         }
     }
 }
