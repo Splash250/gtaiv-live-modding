@@ -837,3 +837,143 @@
                          at GTA.ScriptDomain.ProcessRemoteEvents()
                          at GTA.ScriptDomain.Tick()
                          at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:56 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:57 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:57 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:57 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:57 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:58 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:58 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:25:58 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
