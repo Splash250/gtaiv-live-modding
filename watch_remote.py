@@ -326,7 +326,15 @@ def sync_runtime_logs(state):
     return changed
 
 
-def commit_and_push_logs(remote_name, branch_name, state):
+def commit_and_push_logs(remote_name, branch_name, state, local_sha, remote_sha):
+    if local_sha != remote_sha:
+        log("[logs] deferred while local repo is not at remote HEAD")
+        return False
+
+    if has_uncommitted_changes():
+        log("[logs] deferred because repo has local changes")
+        return False
+
     changed_logs = sync_runtime_logs(state)
     if not changed_logs:
         return False
@@ -426,10 +434,6 @@ def main():
     last_remote_sha = current_remote_sha
     while True:
         try:
-            logs_pushed = commit_and_push_logs(args.remote, args.branch, state)
-            if logs_pushed:
-                last_remote_sha = remote_head(args.remote, args.branch)
-
             current_remote_sha = remote_head(args.remote, args.branch)
             current_local_sha = local_head()
 
@@ -473,6 +477,12 @@ def main():
                         print_reload_decision("skip", "pulled update changed no live .cs/.ini files")
                         mark_skip(state, current_remote_sha, "no_live_file_changes")
                 last_remote_sha = current_remote_sha
+
+            current_remote_sha = remote_head(args.remote, args.branch)
+            current_local_sha = local_head()
+            logs_pushed = commit_and_push_logs(args.remote, args.branch, state, current_local_sha, current_remote_sha)
+            if logs_pushed:
+                last_remote_sha = remote_head(args.remote, args.branch)
         except KeyboardInterrupt:
             log("Stopped.")
             return 0
