@@ -17,6 +17,7 @@ Remote code pulls take priority over log snapshot pushes, so log-side activity i
 Log-only sync intentionally skips in-game script reload to avoid an infinite push/pull/reload loop.
 The default mode is safe live deploy and prints explicit startup state plus deploy decisions for each remote change.
 Watcher runtime files should live only in ignored paths such as `.watch_remote_runtime`.
+Each poll also refreshes `.watch_remote_runtime/last_deploy_status.txt` with the last seen SHAs, decision, skip reason, and changed live files.
 
 ## In-Game Auto Reload
 

@@ -17,6 +17,7 @@ RELOAD_CONSUMED = REPO_DIR / ".reload_consumed"
 STATE_FILE = REPO_DIR / ".live_state.json"
 LOGS_DIR = REPO_DIR / "logs"
 RUNTIME_DIR = REPO_DIR / ".watch_remote_runtime"
+STATUS_FILE = RUNTIME_DIR / "last_deploy_status.txt"
 LOG_SOURCE_FILES = [
     GTAIV_DIR / "ScriptHookDotNet.log",
     GTAIV_DIR / "scripthook.log",
@@ -39,6 +40,10 @@ DEFAULT_STATE = {
     "last_deployed_sha": "",
     "last_reload_requested_sha": "",
     "last_reload_consumed_sha": "",
+    "last_seen_local_sha": "",
+    "last_seen_remote_sha": "",
+    "last_poll_decision": "",
+    "last_changed_live_files": "",
     "last_skip_reason": "",
     "log_tail_hashes": {},
 }
@@ -273,6 +278,48 @@ def save_state(state):
     STATE_FILE.write_text(json.dumps(serializable, indent=2) + "\n", encoding="utf-8")
 
 
+def write_status_file(state, mode_label, repo_lines):
+    changed_live_files = state.get("last_changed_live_files", "")
+    status_lines = [
+        f"mode: {mode_label}",
+        f"repo_status: {'DIRTY' if repo_lines else 'CLEAN'}",
+        f"last_seen_local_sha: {state.get('last_seen_local_sha', '')}",
+        f"last_seen_remote_sha: {state.get('last_seen_remote_sha', '')}",
+        f"last_pulled_sha: {state.get('last_pulled_sha', '')}",
+        f"last_deployed_sha: {state.get('last_deployed_sha', '')}",
+        f"last_reload_requested_sha: {state.get('last_reload_requested_sha', '')}",
+        f"last_reload_consumed_sha: {state.get('last_reload_consumed_sha', '')}",
+        f"last_poll_decision: {state.get('last_poll_decision', '')}",
+        f"last_skip_reason: {state.get('last_skip_reason', '')}",
+        "last_changed_live_files:",
+    ]
+    if changed_live_files:
+        for item in changed_live_files.split("\n"):
+            status_lines.append(f"  {item}")
+    else:
+        status_lines.append("  (none)")
+
+    if repo_lines:
+        status_lines.append("repo_changes:")
+        for line in repo_lines:
+            status_lines.append(f"  {line}")
+
+    STATUS_FILE.write_text("\n".join(status_lines) + "\n", encoding="utf-8")
+
+
+def update_status(state, mode_label, local_sha, remote_sha, repo_lines, decision=None, reason=None, live_paths=None):
+    state["last_seen_local_sha"] = local_sha
+    state["last_seen_remote_sha"] = remote_sha
+    if decision is not None:
+        state["last_poll_decision"] = decision
+    if reason is not None:
+        state["last_skip_reason"] = reason
+    if live_paths is not None:
+        state["last_changed_live_files"] = "\n".join(live_paths)
+    save_state(state)
+    write_status_file(state, mode_label, repo_lines)
+
+
 def mark_skip(state, pulled_sha, reason):
     state["last_pulled_sha"] = pulled_sha or state.get("last_pulled_sha", "")
     state["last_skip_reason"] = reason
@@ -437,6 +484,7 @@ def main():
     current_local_sha = local_head()
     current_remote_sha = remote_head(args.remote, args.branch)
     repo_lines = status_lines()
+    mode_label = "unsafe-auto-reload" if args.unsafe_auto_reload else "safe-live-deploy"
 
     runtime_log_path = args.runtime_log.strip()
     if runtime_log_path:
@@ -455,6 +503,7 @@ def main():
     log(f"Initial local HEAD:  {current_local_sha}")
     log(f"Initial remote HEAD: {current_remote_sha}")
     print_repo_status(repo_lines)
+    update_status(state, mode_label, current_local_sha, current_remote_sha, repo_lines, decision="startup", reason="", live_paths=[])
 
     last_remote_sha = current_remote_sha
     while True:
@@ -462,6 +511,7 @@ def main():
             update_reload_consumption(state)
             current_remote_sha = remote_head(args.remote, args.branch)
             current_local_sha = local_head()
+            repo_lines = status_lines()
 
             if current_remote_sha != last_remote_sha:
                 log(f"Detected remote update: {last_remote_sha} -> {current_remote_sha}")
@@ -469,6 +519,16 @@ def main():
                     print_reload_decision("skip", "repo has uncommitted local changes")
                     print_repo_status(status_lines())
                     mark_skip(state, "", "repo_has_uncommitted_changes")
+                    update_status(
+                        state,
+                        mode_label,
+                        current_local_sha,
+                        current_remote_sha,
+                        status_lines(),
+                        decision="skip",
+                        reason="repo_has_uncommitted_changes",
+                        live_paths=[],
+                    )
                 else:
                     pulled_paths = changed_files_between(last_remote_sha, current_remote_sha)
                     pull_latest(args.remote, args.branch)
@@ -478,6 +538,16 @@ def main():
                     if latest_commit_subject().startswith("log_"):
                         print_reload_decision("skip", "pulled log-only commit")
                         mark_skip(state, current_remote_sha, "log_only_commit")
+                        update_status(
+                            state,
+                            mode_label,
+                            local_head(),
+                            current_remote_sha,
+                            status_lines(),
+                            decision="skip",
+                            reason="log_only_commit",
+                            live_paths=[],
+                        )
                     elif args.unsafe_auto_reload:
                         request_ingame_reload(current_remote_sha)
                         state["last_deployed_sha"] = current_remote_sha
@@ -485,10 +555,30 @@ def main():
                         state["last_skip_reason"] = ""
                         save_state(state)
                         print_reload_decision("reload", "unsafe mode bypassed live-file gating")
+                        update_status(
+                            state,
+                            mode_label,
+                            local_head(),
+                            current_remote_sha,
+                            status_lines(),
+                            decision="reload",
+                            reason="",
+                            live_paths=live_paths,
+                        )
                     elif live_paths:
                         if state.get("last_reload_requested_sha") == current_remote_sha:
                             print_reload_decision("skip", "reload for this commit was already requested earlier")
                             mark_skip(state, current_remote_sha, "duplicate_reload_request")
+                            update_status(
+                                state,
+                                mode_label,
+                                local_head(),
+                                current_remote_sha,
+                                status_lines(),
+                                decision="skip",
+                                reason="duplicate_reload_request",
+                                live_paths=live_paths,
+                            )
                         else:
                             log("Pulled live files:")
                             for path in live_paths:
@@ -499,16 +589,42 @@ def main():
                             state["last_skip_reason"] = ""
                             save_state(state)
                             print_reload_decision("reload", "live .cs/.ini files changed")
+                            update_status(
+                                state,
+                                mode_label,
+                                local_head(),
+                                current_remote_sha,
+                                status_lines(),
+                                decision="reload",
+                                reason="",
+                                live_paths=live_paths,
+                            )
                     else:
                         print_reload_decision("skip", "pulled update changed no live .cs/.ini files")
                         mark_skip(state, current_remote_sha, "no_live_file_changes")
+                        update_status(
+                            state,
+                            mode_label,
+                            local_head(),
+                            current_remote_sha,
+                            status_lines(),
+                            decision="skip",
+                            reason="no_live_file_changes",
+                            live_paths=[],
+                        )
                 last_remote_sha = current_remote_sha
 
             current_remote_sha = remote_head(args.remote, args.branch)
             current_local_sha = local_head()
+            repo_lines = status_lines()
             logs_pushed = commit_and_push_logs(args.remote, args.branch, state, current_local_sha, current_remote_sha)
             if logs_pushed:
                 last_remote_sha = remote_head(args.remote, args.branch)
+                current_remote_sha = last_remote_sha
+                current_local_sha = local_head()
+                repo_lines = status_lines()
+
+            update_status(state, mode_label, current_local_sha, current_remote_sha, repo_lines)
         except KeyboardInterrupt:
             log("Stopped.")
             return 0
