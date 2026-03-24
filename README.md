@@ -11,6 +11,7 @@ Run `python watch_remote.py --runtime-log ""` if you want to disable the default
 The watcher will skip pulls when the repo has uncommitted local changes.
 It also scans the repo for `.cs` and `.ini` files, validates the matching targets in the GTA IV `scripts` folder, creates missing hard links, and repairs stale copied targets when safe both on startup and after every successful pull.
 After a successful pull, it only writes a reload trigger file when the pulled changes include live `.cs` or `.ini` files.
+Reload requests now carry the pulled commit SHA, and the in-game bridge writes `.reload_consumed` after it consumes a request so the reload lifecycle is inspectable.
 It also snapshots GTA IV runtime logs into the repo `logs` folder, but only when the live logs appear to contain errors and the error tail changed since the last snapshot. Those error snapshots are committed as `log_DATETIME` and pushed automatically.
 Remote code pulls take priority over log snapshot pushes, so log-side activity is deferred until the local repo is back at remote HEAD.
 Log-only sync intentionally skips in-game script reload to avoid an infinite push/pull/reload loop.

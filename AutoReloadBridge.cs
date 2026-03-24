@@ -8,6 +8,8 @@ namespace LiveModding
     {
         private static readonly string TriggerPath =
             @"C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto IV\Modding\LiveModding\.reload_request";
+        private static readonly string ConsumedPath =
+            @"C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto IV\Modding\LiveModding\.reload_consumed";
 
         private int nextCheckTime;
         private bool reloadIssued;
@@ -38,8 +40,10 @@ namespace LiveModding
                 return;
             }
 
+            string requestedCommitSha;
             try
             {
+                requestedCommitSha = File.ReadAllText(TriggerPath).Trim();
                 File.Delete(TriggerPath);
             }
             catch
@@ -47,8 +51,21 @@ namespace LiveModding
                 return;
             }
 
+            if (string.IsNullOrEmpty(requestedCommitSha))
+            {
+                requestedCommitSha = "unknown";
+            }
+
+            try
+            {
+                File.WriteAllText(ConsumedPath, requestedCommitSha + Environment.NewLine);
+            }
+            catch
+            {
+            }
+
             reloadIssued = true;
-            Game.DisplayText("LiveModding reload requested.", 2000);
+            Game.DisplayText("LiveModding reload requested: " + requestedCommitSha, 2000);
             Game.Console.SendCommand("ReloadScripts");
         }
     }

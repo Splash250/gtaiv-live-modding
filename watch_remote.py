@@ -13,6 +13,7 @@ REPO_DIR = Path(__file__).resolve().parent
 GTAIV_DIR = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto IV\GTAIV")
 SCRIPTS_DIR = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto IV\GTAIV\scripts")
 RELOAD_TRIGGER = REPO_DIR / ".reload_request"
+RELOAD_CONSUMED = REPO_DIR / ".reload_consumed"
 STATE_FILE = REPO_DIR / ".live_state.json"
 LOGS_DIR = REPO_DIR / "logs"
 RUNTIME_DIR = REPO_DIR / ".watch_remote_runtime"
@@ -37,6 +38,7 @@ DEFAULT_STATE = {
     "last_pulled_sha": "",
     "last_deployed_sha": "",
     "last_reload_requested_sha": "",
+    "last_reload_consumed_sha": "",
     "last_skip_reason": "",
     "log_tail_hashes": {},
 }
@@ -224,9 +226,19 @@ def sync_live_targets():
     }
 
 
-def request_ingame_reload():
-    RELOAD_TRIGGER.write_text("reload\n", encoding="utf-8")
-    log(f"Requested in-game reload via {RELOAD_TRIGGER}")
+def request_ingame_reload(commit_sha):
+    RELOAD_TRIGGER.write_text(f"{commit_sha}\n", encoding="utf-8")
+    log(f"Requested in-game reload via {RELOAD_TRIGGER} for {commit_sha}")
+
+
+def consumed_reload_sha():
+    if not RELOAD_CONSUMED.exists():
+        return ""
+
+    try:
+        return RELOAD_CONSUMED.read_text(encoding="utf-8").splitlines()[0].strip()
+    except (OSError, IndexError):
+        return ""
 
 
 def latest_commit_subject():
@@ -376,6 +388,19 @@ def print_repo_status(lines):
         log("[repo] CLEAN")
 
 
+def update_reload_consumption(state):
+    consumed_sha = consumed_reload_sha()
+    if not consumed_sha:
+        return
+
+    if state.get("last_reload_consumed_sha") == consumed_sha:
+        return
+
+    state["last_reload_consumed_sha"] = consumed_sha
+    save_state(state)
+    log(f"[reload] bridge consumed request for {consumed_sha}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Poll a git remote and fast-forward pull when the remote branch changes."
@@ -434,6 +459,7 @@ def main():
     last_remote_sha = current_remote_sha
     while True:
         try:
+            update_reload_consumption(state)
             current_remote_sha = remote_head(args.remote, args.branch)
             current_local_sha = local_head()
 
@@ -453,7 +479,7 @@ def main():
                         print_reload_decision("skip", "pulled log-only commit")
                         mark_skip(state, current_remote_sha, "log_only_commit")
                     elif args.unsafe_auto_reload:
-                        request_ingame_reload()
+                        request_ingame_reload(current_remote_sha)
                         state["last_deployed_sha"] = current_remote_sha
                         state["last_reload_requested_sha"] = current_remote_sha
                         state["last_skip_reason"] = ""
@@ -467,7 +493,7 @@ def main():
                             log("Pulled live files:")
                             for path in live_paths:
                                 log(f"  {path}")
-                            request_ingame_reload()
+                            request_ingame_reload(current_remote_sha)
                             state["last_deployed_sha"] = current_remote_sha
                             state["last_reload_requested_sha"] = current_remote_sha
                             state["last_skip_reason"] = ""
