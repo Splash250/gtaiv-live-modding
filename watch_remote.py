@@ -28,6 +28,7 @@ ERROR_MARKERS = [
     "failed",
 ]
 ERROR_TAIL_LINE_COUNT = 80
+LIVE_FILE_SUFFIXES = {".cs", ".ini"}
 
 
 def run_git(args):
@@ -90,6 +91,22 @@ def remote_head(remote_name, branch_name):
         raise RuntimeError(f"Remote branch '{remote_name}/{branch_name}' does not exist yet.")
 
     return line.split()[0]
+
+
+def changed_files_between(base_sha, target_sha):
+    if not base_sha or not target_sha or base_sha == target_sha:
+        return []
+
+    output = git_output(["diff", "--name-only", base_sha, target_sha])
+    return [line.strip() for line in output.splitlines() if line.strip()]
+
+
+def is_live_repo_file(path_text):
+    return Path(path_text).suffix.lower() in LIVE_FILE_SUFFIXES
+
+
+def changed_live_files(paths):
+    return [path for path in paths if is_live_repo_file(path)]
 
 
 def pull_latest(remote_name, branch_name):
@@ -275,12 +292,19 @@ def main():
                 if has_uncommitted_changes():
                     print("Skipping pull because the repo has uncommitted local changes.")
                 else:
+                    pulled_paths = changed_files_between(last_remote_sha, current_remote_sha)
                     pull_latest(args.remote, args.branch)
                     create_missing_hardlinks()
-                    if not latest_commit_subject().startswith("log_"):
+                    live_paths = changed_live_files(pulled_paths)
+                    if latest_commit_subject().startswith("log_"):
+                        print("Pulled log-only update; skipping in-game reload.")
+                    elif live_paths:
+                        print("Pulled live files:")
+                        for path in live_paths:
+                            print(f"  {path}")
                         request_ingame_reload()
                     else:
-                        print("Pulled log-only update; skipping in-game reload.")
+                        print("Pulled update changed no live .cs/.ini files; skipping in-game reload.")
                 last_remote_sha = current_remote_sha
         except KeyboardInterrupt:
             print("Stopped.")
