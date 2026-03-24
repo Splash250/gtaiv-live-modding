@@ -1,0 +1,439 @@
+2026-03-24 14:51:58 - Initializing ScriptHookDotNet v1.7.1.8 BETA (on GTA IV version 1.2.0.59 with C++ Hook version 0.5.1)
+2026-03-24 14:52:11 - Direct3D device created!
+
+2026-03-24 14:52:12 - SEARCHING FOR SCRIPTS...
+2026-03-24 14:52:12 - Loading dynamic scriptfile 'scripts\AutoReloadBridge.cs' ...
+2026-03-24 14:52:12 -  ...found script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 14:52:12 - Loading dynamic scriptfile 'scripts\BodyguardChaosF6.cs' ...
+2026-03-24 14:52:12 -  ...found script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:52:12 - Loading dynamic scriptfile 'scripts\BuggedSwingF4.cs' ...
+2026-03-24 14:52:12 -  ...found script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:52:12 - Loading dynamic scriptfile 'scripts\CarCannonMicroSMG.cs' ...
+2026-03-24 14:52:12 -  ...found script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:52:12 - Loading dynamic scriptfile 'scripts\DrivingSkills.cs' ...
+2026-03-24 14:52:12 -  ...found script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:52:12 - Loading dynamic scriptfile 'scripts\HelloWorldF5.cs' ...
+2026-03-24 14:52:13 -  ...found script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:52:13 - Loading dynamic scriptfile 'scripts\HelloWorldLive.cs' ...
+2026-03-24 14:52:13 -  ...found script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:52:13 - Loading dynamic scriptfile 'scripts\TestLiveDeploy.cs' ...
+2026-03-24 14:52:13 -  ...found script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:52:13 - Loading dynamic scriptfile 'scripts\TornadoF7.cs' ...
+2026-03-24 14:52:13 -  ...found script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:52:13 - DONE! 9 valid scripts found!
+
+2026-03-24 14:52:13 - STARTING SCRIPTS...
+2026-03-24 14:52:13 - INFO: Phone number checks are not available!
+2026-03-24 14:52:13 -  ...successfully started script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:52:13 -  ...successfully started script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:52:13 -  ...successfully started script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:52:13 -  ...successfully started script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:52:13 -  ...successfully started script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:52:13 -  ...successfully started script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:52:13 -  ...successfully started script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:52:13 -  ...successfully started script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:52:13 -  ...successfully started script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 14:57:36 - Deferred ReloadScripts request queued from script console command.
+2026-03-24 14:57:36 - Executing deferred ReloadScripts request from script console command...
+2026-03-24 14:57:36 - SCRIPTS TERMINATED!
+
+2026-03-24 14:57:36 - SEARCHING FOR SCRIPTS...
+2026-03-24 14:57:36 - Loading dynamic scriptfile 'scripts\AutoReloadBridge.cs' ...
+2026-03-24 14:57:37 -  ...found script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 14:57:37 - Loading dynamic scriptfile 'scripts\BodyguardChaosF6.cs' ...
+2026-03-24 14:57:37 -  ...found script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:57:37 - Loading dynamic scriptfile 'scripts\BuggedSwingF4.cs' ...
+2026-03-24 14:57:37 -  ...found script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:57:37 - Loading dynamic scriptfile 'scripts\CarCannonMicroSMG.cs' ...
+2026-03-24 14:57:37 -  ...found script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:57:37 - Loading dynamic scriptfile 'scripts\DrivingSkills.cs' ...
+2026-03-24 14:57:37 -  ...found script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:57:37 - Loading dynamic scriptfile 'scripts\HelloWorldF5.cs' ...
+2026-03-24 14:57:38 -  ...found script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:57:38 - Loading dynamic scriptfile 'scripts\HelloWorldLive.cs' ...
+2026-03-24 14:57:38 -  ...found script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:57:38 - Loading dynamic scriptfile 'scripts\TestLiveDeploy.cs' ...
+2026-03-24 14:57:38 -  ...found script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:57:38 - Loading dynamic scriptfile 'scripts\TornadoF7.cs' ...
+2026-03-24 14:57:38 -  ...found script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:57:38 - DONE! 9 valid scripts found!
+
+2026-03-24 14:57:38 - STARTING SCRIPTS...
+2026-03-24 14:57:38 - Deferred ReloadScripts request completed.
+2026-03-24 14:57:38 -  ...successfully started script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:57:38 -  ...successfully started script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:57:38 -  ...successfully started script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:57:38 -  ...successfully started script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:57:38 -  ...successfully started script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:57:38 -  ...successfully started script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:57:38 -  ...successfully started script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:57:38 -  ...successfully started script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:57:38 -  ...successfully started script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 14:57:52 - Deferred ReloadScripts request queued from script console command.
+2026-03-24 14:57:52 - Executing deferred ReloadScripts request from script console command...
+2026-03-24 14:57:52 - SCRIPTS TERMINATED!
+
+2026-03-24 14:57:52 - SEARCHING FOR SCRIPTS...
+2026-03-24 14:57:52 - Loading dynamic scriptfile 'scripts\AutoReloadBridge.cs' ...
+2026-03-24 14:57:52 -  ...found script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 14:57:52 - Loading dynamic scriptfile 'scripts\BodyguardChaosF6.cs' ...
+2026-03-24 14:57:52 -  ...found script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:57:52 - Loading dynamic scriptfile 'scripts\BuggedSwingF4.cs' ...
+2026-03-24 14:57:53 -  ...found script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:57:53 - Loading dynamic scriptfile 'scripts\CarCannonMicroSMG.cs' ...
+2026-03-24 14:57:53 -  ...found script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:57:53 - Loading dynamic scriptfile 'scripts\DrivingSkills.cs' ...
+2026-03-24 14:57:53 -  ...found script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:57:53 - Loading dynamic scriptfile 'scripts\HelloWorldF5.cs' ...
+2026-03-24 14:57:53 -  ...found script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:57:53 - Loading dynamic scriptfile 'scripts\HelloWorldLive.cs' ...
+2026-03-24 14:57:53 -  ...found script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:57:53 - Loading dynamic scriptfile 'scripts\TestLiveDeploy.cs' ...
+2026-03-24 14:57:53 -  ...found script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:57:53 - Loading dynamic scriptfile 'scripts\TornadoF7.cs' ...
+2026-03-24 14:57:54 -  ...found script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:57:54 - DONE! 9 valid scripts found!
+
+2026-03-24 14:57:54 - STARTING SCRIPTS...
+2026-03-24 14:57:54 - Deferred ReloadScripts request completed.
+2026-03-24 14:57:54 -  ...successfully started script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:57:54 -  ...successfully started script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:57:54 -  ...successfully started script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:57:54 -  ...successfully started script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:57:54 -  ...successfully started script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:57:54 -  ...successfully started script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:57:54 -  ...successfully started script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:57:54 -  ...successfully started script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:57:54 -  ...successfully started script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 14:58:04 - Deferred ReloadScripts request queued from script console command.
+2026-03-24 14:58:04 - Executing deferred ReloadScripts request from script console command...
+2026-03-24 14:58:04 - SCRIPTS TERMINATED!
+
+2026-03-24 14:58:04 - SEARCHING FOR SCRIPTS...
+2026-03-24 14:58:04 - Loading dynamic scriptfile 'scripts\AutoReloadBridge.cs' ...
+2026-03-24 14:58:04 -  ...found script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 14:58:04 - Loading dynamic scriptfile 'scripts\BodyguardChaosF6.cs' ...
+2026-03-24 14:58:04 -  ...found script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:58:04 - Loading dynamic scriptfile 'scripts\BuggedSwingF4.cs' ...
+2026-03-24 14:58:04 -  ...found script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:58:04 - Loading dynamic scriptfile 'scripts\CarCannonMicroSMG.cs' ...
+2026-03-24 14:58:05 -  ...found script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:58:05 - Loading dynamic scriptfile 'scripts\DrivingSkills.cs' ...
+2026-03-24 14:58:05 -  ...found script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:58:05 - Loading dynamic scriptfile 'scripts\HelloWorldF5.cs' ...
+2026-03-24 14:58:05 -  ...found script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:58:05 - Loading dynamic scriptfile 'scripts\HelloWorldLive.cs' ...
+2026-03-24 14:58:05 -  ...found script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:58:05 - Loading dynamic scriptfile 'scripts\TestLiveDeploy.cs' ...
+2026-03-24 14:58:05 -  ...found script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:58:05 - Loading dynamic scriptfile 'scripts\TornadoF7.cs' ...
+2026-03-24 14:58:05 -  ...found script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:58:05 - DONE! 9 valid scripts found!
+
+2026-03-24 14:58:05 - STARTING SCRIPTS...
+2026-03-24 14:58:05 - Deferred ReloadScripts request completed.
+2026-03-24 14:58:05 -  ...successfully started script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:58:05 -  ...successfully started script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:58:05 -  ...successfully started script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:58:05 -  ...successfully started script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:58:05 -  ...successfully started script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:58:05 -  ...successfully started script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:58:05 -  ...successfully started script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:58:05 -  ...successfully started script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:58:05 -  ...successfully started script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 14:58:24 - Deferred ReloadScripts request queued from script console command.
+2026-03-24 14:58:24 - Executing deferred ReloadScripts request from script console command...
+2026-03-24 14:58:24 - SCRIPTS TERMINATED!
+
+2026-03-24 14:58:25 - SEARCHING FOR SCRIPTS...
+2026-03-24 14:58:25 - Loading dynamic scriptfile 'scripts\AutoReloadBridge.cs' ...
+2026-03-24 14:58:25 -  ...found script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 14:58:25 - Loading dynamic scriptfile 'scripts\BodyguardChaosF6.cs' ...
+2026-03-24 14:58:25 -  ...found script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:58:25 - Loading dynamic scriptfile 'scripts\BuggedSwingF4.cs' ...
+2026-03-24 14:58:25 -  ...found script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:58:25 - Loading dynamic scriptfile 'scripts\CarCannonMicroSMG.cs' ...
+2026-03-24 14:58:25 -  ...found script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:58:25 - Loading dynamic scriptfile 'scripts\DrivingSkills.cs' ...
+2026-03-24 14:58:25 -  ...found script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:58:25 - Loading dynamic scriptfile 'scripts\HelloWorldF5.cs' ...
+2026-03-24 14:58:25 -  ...found script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:58:25 - Loading dynamic scriptfile 'scripts\HelloWorldLive.cs' ...
+2026-03-24 14:58:26 -  ...found script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:58:26 - Loading dynamic scriptfile 'scripts\TestLiveDeploy.cs' ...
+2026-03-24 14:58:26 -  ...found script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:58:26 - Loading dynamic scriptfile 'scripts\TornadoF7.cs' ...
+2026-03-24 14:58:26 -  ...found script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:58:26 - DONE! 9 valid scripts found!
+
+2026-03-24 14:58:26 - STARTING SCRIPTS...
+2026-03-24 14:58:26 - Deferred ReloadScripts request completed.
+2026-03-24 14:58:26 -  ...successfully started script 'TornadoF7.TornadoF7Script'!
+2026-03-24 14:58:26 -  ...successfully started script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 14:58:26 -  ...successfully started script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 14:58:26 -  ...successfully started script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 14:58:26 -  ...successfully started script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 14:58:26 -  ...successfully started script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 14:58:26 -  ...successfully started script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 14:58:26 -  ...successfully started script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 14:58:26 -  ...successfully started script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 15:14:26 - Deferred ReloadScripts request queued from script console command.
+2026-03-24 15:14:26 - Executing deferred ReloadScripts request from script console command...
+2026-03-24 15:14:26 - SCRIPTS TERMINATED!
+
+2026-03-24 15:14:26 - SEARCHING FOR SCRIPTS...
+2026-03-24 15:14:26 - Loading dynamic scriptfile 'scripts\AutoReloadBridge.cs' ...
+2026-03-24 15:14:26 -  ...found script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 15:14:26 - Loading dynamic scriptfile 'scripts\BodyguardChaosF6.cs' ...
+2026-03-24 15:14:26 -  ...found script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 15:14:26 - Loading dynamic scriptfile 'scripts\BuggedSwingF4.cs' ...
+2026-03-24 15:14:26 -  ...found script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 15:14:26 - Loading dynamic scriptfile 'scripts\CarCannonMicroSMG.cs' ...
+2026-03-24 15:14:27 -  ...found script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 15:14:27 - Loading dynamic scriptfile 'scripts\DrivingSkills.cs' ...
+2026-03-24 15:14:27 -  ...found script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 15:14:27 - Loading dynamic scriptfile 'scripts\HelloWorldF5.cs' ...
+2026-03-24 15:14:27 -  ...found script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 15:14:27 - Loading dynamic scriptfile 'scripts\HelloWorldLive.cs' ...
+2026-03-24 15:14:27 -  ...found script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 15:14:27 - Loading dynamic scriptfile 'scripts\TestLiveDeploy.cs' ...
+2026-03-24 15:14:28 -  ...found script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 15:14:28 - Loading dynamic scriptfile 'scripts\TornadoF7.cs' ...
+2026-03-24 15:14:28 -  ...found script 'TornadoF7.TornadoF7Script'!
+2026-03-24 15:14:28 - DONE! 9 valid scripts found!
+
+2026-03-24 15:14:28 - STARTING SCRIPTS...
+2026-03-24 15:14:28 - Deferred ReloadScripts request completed.
+2026-03-24 15:14:28 -  ...successfully started script 'TornadoF7.TornadoF7Script'!
+2026-03-24 15:14:28 -  ...successfully started script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 15:14:28 -  ...successfully started script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 15:14:28 -  ...successfully started script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 15:14:28 -  ...successfully started script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 15:14:28 -  ...successfully started script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 15:14:28 -  ...successfully started script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 15:14:28 -  ...successfully started script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 15:14:28 -  ...successfully started script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 15:18:15 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:18:15 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:18:15 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:18:17 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:18:17 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:18:19 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:18:19 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:19:46 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:19:47 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:07 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:09 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:16 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:32 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:32 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:32 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:32 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:32 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:32 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:32 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:34 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:34 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:34 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:34 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:34 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:35 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:35 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:35 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:35 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:35 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:35 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:36 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
+2026-03-24 15:20:36 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
