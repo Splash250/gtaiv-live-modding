@@ -15,6 +15,7 @@ SCRIPTS_DIR = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Grand Theft A
 RELOAD_TRIGGER = REPO_DIR / ".reload_request"
 STATE_FILE = REPO_DIR / ".live_state.json"
 LOGS_DIR = REPO_DIR / "logs"
+RUNTIME_DIR = REPO_DIR / ".watch_remote_runtime"
 LOG_SOURCE_FILES = [
     GTAIV_DIR / "ScriptHookDotNet.log",
     GTAIV_DIR / "scripthook.log",
@@ -39,6 +40,10 @@ DEFAULT_STATE = {
     "last_skip_reason": "",
     "log_tail_hashes": {},
 }
+
+
+def log(message):
+    print(message, flush=True)
 
 
 def run_git(args):
@@ -134,6 +139,10 @@ def ensure_scripts_dir():
         raise RuntimeError(f"GTA IV scripts folder does not exist: {SCRIPTS_DIR}")
 
 
+def ensure_runtime_dir():
+    RUNTIME_DIR.mkdir(exist_ok=True)
+
+
 def repo_files_to_link():
     for path in REPO_DIR.rglob("*"):
         if not path.is_file():
@@ -158,19 +167,19 @@ def create_missing_hardlinks():
         created.append(target.name)
 
     if created:
-        print("Created hard links:")
+        log("Created hard links:")
         for name in created:
-            print(f"  {name}")
+            log(f"  {name}")
 
     if skipped:
-        print("Skipped existing targets:")
+        log("Skipped existing targets:")
         for name in skipped:
-            print(f"  {name}")
+            log(f"  {name}")
 
 
 def request_ingame_reload():
     RELOAD_TRIGGER.write_text("reload\n", encoding="utf-8")
-    print(f"Requested in-game reload via {RELOAD_TRIGGER}")
+    log(f"Requested in-game reload via {RELOAD_TRIGGER}")
 
 
 def latest_commit_subject():
@@ -263,9 +272,9 @@ def sync_runtime_logs(state):
         save_state(state)
 
     if changed:
-        print("Updated repo log snapshots:")
+        log("Updated repo log snapshots:")
         for name in changed:
-            print(f"  {name}")
+            log(f"  {name}")
 
     return changed
 
@@ -285,22 +294,31 @@ def commit_and_push_logs(remote_name, branch_name, state):
             return False
         raise RuntimeError(output)
 
-    print(commit_result.stdout.strip())
+    log(commit_result.stdout.strip())
 
     push_result = run_git(["push", remote_name, f"HEAD:{branch_name}"])
     if push_result.returncode != 0:
         raise RuntimeError(push_result.stderr.strip() or push_result.stdout.strip() or "git push failed")
 
     if push_result.stdout.strip():
-        print(push_result.stdout.strip())
+        log(push_result.stdout.strip())
     if push_result.stderr.strip():
-        print(push_result.stderr.strip())
+        log(push_result.stderr.strip())
 
     return True
 
 
 def print_reload_decision(decision, reason):
-    print(f"[deploy] {decision}: {reason}")
+    log(f"[deploy] {decision}: {reason}")
+
+
+def print_repo_status(lines):
+    if lines:
+        log(f"[repo] DIRTY ({len(lines)} change(s))")
+        for line in lines:
+            log(f"  {line}")
+    else:
+        log("[repo] CLEAN")
 
 
 def main():
@@ -320,25 +338,45 @@ def main():
         action="store_true",
         help="Reload after any non-log pull, even when no live .cs/.ini files changed.",
     )
+    parser.add_argument(
+        "--runtime-log",
+        default=str(RUNTIME_DIR / "watch_remote.log"),
+        help="Optional runtime log path. Use '' to disable file logging. Default: .watch_remote_runtime/watch_remote.log",
+    )
     args = parser.parse_args()
 
     if args.interval < 2:
-        print("Interval too low; use 2 seconds or more.", file=sys.stderr)
+        print("Interval too low; use 2 seconds or more.", file=sys.stderr, flush=True)
         return 1
 
     ensure_remote_exists(args.remote)
     ensure_branch_exists(args.remote, args.branch)
+    ensure_runtime_dir()
     state = load_state()
     create_missing_hardlinks()
-    commit_and_push_logs(args.remote, args.branch, state)
+    current_local_sha = local_head()
+    current_remote_sha = remote_head(args.remote, args.branch)
+    repo_lines = status_lines()
 
-    print(f"Watching {args.remote}/{args.branch} from {REPO_DIR}")
-    if args.unsafe_auto_reload:
-        print("[mode] unsafe-auto-reload enabled")
+    runtime_log_path = args.runtime_log.strip()
+    if runtime_log_path:
+        log_path = Path(runtime_log_path)
+        if not log_path.is_absolute():
+            log_path = REPO_DIR / log_path
+        log(f"[runtime] log path reserved: {log_path}")
     else:
-        print("[mode] safe live deploy")
+        log("[runtime] file logging disabled")
 
-    last_remote_sha = None
+    log(f"Watching {args.remote}/{args.branch} from {REPO_DIR}")
+    if args.unsafe_auto_reload:
+        log("[mode] unsafe-auto-reload enabled")
+    else:
+        log("[mode] safe live deploy")
+    log(f"Initial local HEAD:  {current_local_sha}")
+    log(f"Initial remote HEAD: {current_remote_sha}")
+    print_repo_status(repo_lines)
+
+    last_remote_sha = current_remote_sha
     while True:
         try:
             logs_pushed = commit_and_push_logs(args.remote, args.branch, state)
@@ -348,15 +386,11 @@ def main():
             current_remote_sha = remote_head(args.remote, args.branch)
             current_local_sha = local_head()
 
-            if last_remote_sha is None:
-                last_remote_sha = current_remote_sha
-                print(f"Initial local HEAD:  {current_local_sha}")
-                print(f"Initial remote HEAD: {current_remote_sha}")
-
             if current_remote_sha != last_remote_sha:
-                print(f"Detected remote update: {last_remote_sha} -> {current_remote_sha}")
+                log(f"Detected remote update: {last_remote_sha} -> {current_remote_sha}")
                 if has_uncommitted_changes():
                     print_reload_decision("skip", "repo has uncommitted local changes")
+                    print_repo_status(status_lines())
                     mark_skip(state, "", "repo_has_uncommitted_changes")
                 else:
                     pulled_paths = changed_files_between(last_remote_sha, current_remote_sha)
@@ -379,9 +413,9 @@ def main():
                             print_reload_decision("skip", "reload for this commit was already requested earlier")
                             mark_skip(state, current_remote_sha, "duplicate_reload_request")
                         else:
-                            print("Pulled live files:")
+                            log("Pulled live files:")
                             for path in live_paths:
-                                print(f"  {path}")
+                                log(f"  {path}")
                             request_ingame_reload()
                             state["last_deployed_sha"] = current_remote_sha
                             state["last_reload_requested_sha"] = current_remote_sha
@@ -393,10 +427,10 @@ def main():
                         mark_skip(state, current_remote_sha, "no_live_file_changes")
                 last_remote_sha = current_remote_sha
         except KeyboardInterrupt:
-            print("Stopped.")
+            log("Stopped.")
             return 0
         except Exception as exc:
-            print(f"[watch_remote] {exc}")
+            log(f"[watch_remote] {exc}")
 
         time.sleep(args.interval)
 
