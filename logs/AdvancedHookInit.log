@@ -1,0 +1,18 @@
+Log started on: 13:45:16 3-24-2026
+------------------------
+[INFO - 13:45:18] Decryption routine finished
+[INFO - 13:45:18] Gameversion - Dynamic
+[INFO - 13:45:18] AdvancedHookInit 0.4 (C) 2013-2020 LMS - Initialized
+[INFO - 13:45:18] Attaching hooks...
+[INFO - 13:45:18] CPools::InstallHooks: Hooking CPool__Initialize
+[INFO - 13:45:18] Data unprotected
+[INFO - 13:45:18] Game patched
+[INFO - 13:45:18] Failed to disable xlive protections
+[INFO - 13:45:18] Disabling network connection check
+[INFO - 13:45:18] Skipped network connection patch
+[INFO - 13:45:18] Spawning patcher thread
+[INFO - 13:45:21] Increasing size of "PtrNode Single" pool from 8 to 10
+[INFO - 13:45:21] Increasing size of "PtrNode Double" pool from 16 to 20
+[INFO - 13:45:21] Increasing size of "Building" pool from 112 to 132
+[INFO - 13:45:21] CPool__Initialize: Size: 132 - Name: Building - EntrySize: 32000
+[INFO - 13:45:32] Disabling loading screens
