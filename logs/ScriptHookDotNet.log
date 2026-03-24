@@ -1249,3 +1249,49 @@
 2026-03-24 15:36:27 -  ...successfully started script 'BuggedSwingF4.BuggedSwingScript'!
 2026-03-24 15:36:27 -  ...successfully started script 'BodyguardChaosF6.BodyguardChaosScript'!
 2026-03-24 15:36:27 -  ...successfully started script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 15:43:40 - Deferred ReloadScripts request queued from script console command.
+2026-03-24 15:43:40 - Executing deferred ReloadScripts request from script console command...
+2026-03-24 15:43:40 - SCRIPTS TERMINATED!
+
+2026-03-24 15:43:40 - SEARCHING FOR SCRIPTS...
+2026-03-24 15:43:40 - Loading dynamic scriptfile 'scripts\AutoReloadBridge.cs' ...
+2026-03-24 15:43:40 -  ...found script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 15:43:40 - Loading dynamic scriptfile 'scripts\BodyguardChaosF6.cs' ...
+2026-03-24 15:43:40 -  ...found script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 15:43:40 - Loading dynamic scriptfile 'scripts\BuggedSwingF4.cs' ...
+2026-03-24 15:43:40 -  ...found script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 15:43:40 - Loading dynamic scriptfile 'scripts\CarCannonMicroSMG.cs' ...
+2026-03-24 15:43:41 -  ...found script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 15:43:41 - Loading dynamic scriptfile 'scripts\DrivingSkills.cs' ...
+2026-03-24 15:43:41 -  ...found script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 15:43:41 - Loading dynamic scriptfile 'scripts\healts.cs' ...
+2026-03-24 15:43:41 -  ...found script 'LiveModding.HealtsScript'!
+2026-03-24 15:43:41 - Loading dynamic scriptfile 'scripts\HelloWorldF5.cs' ...
+2026-03-24 15:43:41 -  ...found script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 15:43:41 - Loading dynamic scriptfile 'scripts\HelloWorldLive.cs' ...
+2026-03-24 15:43:41 -  ...found script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 15:43:41 - Loading dynamic scriptfile 'scripts\TestLiveDeploy.cs' ...
+2026-03-24 15:43:42 -  ...found script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 15:43:42 - Loading dynamic scriptfile 'scripts\TornadoF7.cs' ...
+2026-03-24 15:43:42 -  ...found script 'TornadoF7.TornadoF7Script'!
+2026-03-24 15:43:42 - DONE! 10 valid scripts found!
+
+2026-03-24 15:43:42 - STARTING SCRIPTS...
+2026-03-24 15:43:42 - Deferred ReloadScripts request completed.
+2026-03-24 15:43:42 -  ...successfully started script 'TornadoF7.TornadoF7Script'!
+2026-03-24 15:43:42 -  ...successfully started script 'LiveModding.TestLiveDeployScript'!
+2026-03-24 15:43:42 -  ...successfully started script 'LiveModding.HelloWorldLiveScript'!
+2026-03-24 15:43:42 -  ...successfully started script 'HelloWorldF5.HelloWorldScript'!
+2026-03-24 15:43:42 -  ...successfully started script 'LiveModding.HealtsScript'!
+2026-03-24 15:43:42 -  ...successfully started script 'DrivingSkills.DrivingSkillsScript'!
+2026-03-24 15:43:42 -  ...successfully started script 'CarCannonMicroSMG.CarCannonMicroSMGScript'!
+2026-03-24 15:43:42 -  ...successfully started script 'BuggedSwingF4.BuggedSwingScript'!
+2026-03-24 15:43:42 -  ...successfully started script 'BodyguardChaosF6.BodyguardChaosScript'!
+2026-03-24 15:43:42 -  ...successfully started script 'LiveModding.AutoReloadBridgeScript'!
+2026-03-24 15:48:02 - Error during NetHook.Tick:
+                      System.AccessViolationException: Attempted to read or write protected memory. This is often an indication that other memory is corrupt.
+                         at unmanaged.NativeContext3.Invoke(Int32 nameptr, Byte[] args, Int32 argnum, NativeContext3* cxt)
+                         at GTA.ScriptDomain.RemoteEvent(RemoteEventArgs ev)
+                         at GTA.ScriptDomain.ProcessRemoteEvents()
+                         at GTA.ScriptDomain.Tick()
+                         at GTA.NetHook.Tick()
