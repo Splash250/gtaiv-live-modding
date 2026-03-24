@@ -1,4 +1,5 @@
 import argparse
+import hashlib
 import json
 import shutil
 import subprocess
@@ -36,6 +37,7 @@ DEFAULT_STATE = {
     "last_deployed_sha": "",
     "last_reload_requested_sha": "",
     "last_skip_reason": "",
+    "log_tail_hashes": {},
 }
 
 
@@ -190,8 +192,11 @@ def load_state():
 
     state = dict(DEFAULT_STATE)
     for key in DEFAULT_STATE:
-        value = data.get(key, "")
-        state[key] = value if isinstance(value, str) else ""
+        value = data.get(key, DEFAULT_STATE[key])
+        if isinstance(DEFAULT_STATE[key], dict):
+            state[key] = value if isinstance(value, dict) else {}
+        else:
+            state[key] = value if isinstance(value, str) else ""
     return state
 
 
@@ -218,32 +223,44 @@ def read_log_tail(source, line_count=ERROR_TAIL_LINE_COUNT):
     return "\n".join(lines[-line_count:]).lower()
 
 
-def log_contains_error(source):
-    tail_text = read_log_tail(source)
-    if not tail_text:
-        return False
-
-    return any(marker in tail_text for marker in ERROR_MARKERS)
+def log_tail_hash(tail_text):
+    return hashlib.sha256(tail_text.encode("utf-8")).hexdigest()
 
 
-def sync_runtime_logs():
+def sync_runtime_logs(state):
     ensure_logs_dir()
 
     changed = []
+    hashes = state.setdefault("log_tail_hashes", {})
+    state_changed = False
     for source in LOG_SOURCE_FILES:
         if not source.exists():
             continue
-        if not log_contains_error(source):
+
+        tail_text = read_log_tail(source)
+        if not tail_text or not any(marker in tail_text for marker in ERROR_MARKERS):
+            if source.name in hashes:
+                hashes.pop(source.name, None)
+                state_changed = True
+            continue
+
+        current_tail_hash = log_tail_hash(tail_text)
+        if hashes.get(source.name) == current_tail_hash:
             continue
 
         target = LOGS_DIR / source.name
         source_bytes = source.read_bytes()
         target_bytes = target.read_bytes() if target.exists() else None
+        hashes[source.name] = current_tail_hash
+        state_changed = True
         if target_bytes == source_bytes:
             continue
 
         shutil.copy2(source, target)
         changed.append(target.name)
+
+    if state_changed:
+        save_state(state)
 
     if changed:
         print("Updated repo log snapshots:")
@@ -253,8 +270,8 @@ def sync_runtime_logs():
     return changed
 
 
-def commit_and_push_logs(remote_name, branch_name):
-    changed_logs = sync_runtime_logs()
+def commit_and_push_logs(remote_name, branch_name, state):
+    changed_logs = sync_runtime_logs(state)
     if not changed_logs:
         return False
 
@@ -304,14 +321,14 @@ def main():
     ensure_branch_exists(args.remote, args.branch)
     state = load_state()
     create_missing_hardlinks()
-    commit_and_push_logs(args.remote, args.branch)
+    commit_and_push_logs(args.remote, args.branch, state)
 
     print(f"Watching {args.remote}/{args.branch} from {REPO_DIR}")
 
     last_remote_sha = None
     while True:
         try:
-            logs_pushed = commit_and_push_logs(args.remote, args.branch)
+            logs_pushed = commit_and_push_logs(args.remote, args.branch, state)
             if logs_pushed:
                 last_remote_sha = remote_head(args.remote, args.branch)
 
