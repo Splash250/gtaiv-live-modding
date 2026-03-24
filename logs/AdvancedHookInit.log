@@ -11,3 +11,7 @@ Log started on: 15:56:4 3-24-2026
 [INFO - 15:56:5] Disabling network connection check
 [INFO - 15:56:5] Skipped network connection patch
 [INFO - 15:56:5] Spawning patcher thread
+[INFO - 15:56:7] Increasing size of "PtrNode Single" pool from 8 to 10
+[INFO - 15:56:7] Increasing size of "PtrNode Double" pool from 16 to 20
+[INFO - 15:56:7] Increasing size of "Building" pool from 112 to 132
+[INFO - 15:56:7] CPool__Initialize: Size: 132 - Name: Building - EntrySize: 32000
